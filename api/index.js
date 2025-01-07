@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
 
+const eventRouter = require('./../routers/eventRouter');
 const authRouter = require('./../routers/authRouter');
 const userRouter = require('./../routers/userRouter');
 
@@ -32,6 +33,7 @@ mongoose
 		console.log(err);
 	});
 
+app.use('/api/event', eventRouter);
 app.use('/api/auth', authRouter);
 app.use('/api', userRouter);
 app.get('/', (req, res) => {
