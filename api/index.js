@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 const authRouter = require('./../routers/authRouter');
 const userRouter = require('./../routers/userRouter');
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-	.connect('mongodb+srv://momentsbride2:2ztk02Veg1aOaB02@cluster0.qsull.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+	.connect(process.env.MONGO_URI)
 	.then(() => {
 		console.log('Database connected');
 	})
