@@ -2,12 +2,6 @@ const jwt = require('jsonwebtoken');
 
 exports.identifier = (req, res, next) => {
 	let token;
-	// if (req.headers.client === 'not-browser') {
-	// 	token = req.headers.authorization;
-	// } else {
-	// 	token = req.cookies['Authorization'];
-	// }
-
 	if (req.headers.authorization) {
 		token = req.headers.authorization;
 	}
