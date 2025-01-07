@@ -4,8 +4,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
-const authRouter = require('./routers/authRouter');
-const userRouter = require('./routers/userRouter');
+// const authRouter = require('./routers/authRouter');
+// const userRouter = require('./routers/userRouter');
 
 // Konfigurasi CORS
 const corsOptions = {
