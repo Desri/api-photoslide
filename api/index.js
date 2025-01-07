@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const authRouter = require('./routers/authRouter');
-// const userRouter = require('./routers/userRouter');
+const userRouter = require('./routers/userRouter');
 
 // Konfigurasi CORS
 const corsOptions = {
@@ -31,8 +31,8 @@ mongoose
 		console.log(err);
 	});
 
-// app.use('/api/auth', authRouter);
-// app.use('/api', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api', userRouter);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello from the server' });
 });
