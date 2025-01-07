@@ -100,7 +100,7 @@ async function signup(req, res) {
 // 		console.log(error);
 // 	}
 // };
-
-module.exports = {
-	signup
-}
+module.exports = signup;
+// module.exports = {
+// 	signup
+// }
