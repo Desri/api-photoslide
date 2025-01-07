@@ -8,15 +8,16 @@ const authRouter = require('./../routers/authRouter');
 const userRouter = require('./../routers/userRouter');
 
 // Konfigurasi CORS
-const corsOptions = {
-	origin: 'https://wedding-eight-pi.vercel.app', // Ganti dengan asal yang diperbolehkan
-	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Metode yang diizinkan
-	credentials: true, // Jika menggunakan cookie atau header otentikasi
-};
+// const corsOptions = {
+// 	origin: 'https://wedding-eight-pi.vercel.app', // Ganti dengan asal yang diperbolehkan
+// 	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Metode yang diizinkan
+// 	credentials: true, // Jika menggunakan cookie atau header otentikasi
+// };
 
 const app = express();
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+// app.use(cors(corsOptions));
+// app.options('*', cors(corsOptions));
+app.options('*', cors());
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
