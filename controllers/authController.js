@@ -7,80 +7,28 @@ const User = require('../models/usersModel');
 const { doHash, doHashValidation } = require('../utils/hashing');
 
 exports.signup = async (req, res) => {
-	
-
 	try {
-		const { fullname, email, password } = req.body;
-
-
-		const existingUser = await User.findOne({ email });
-		if(existingUser) {
+		const checkEmail = await User.findOne({email: `${req.body.email}`}, {email: 1});
+		if(checkEmail) {
 			res.status(201).json({
 				success: false,
 				message: 'User already exists!'
 			});
+		} else {
+			const register = new User({
+				fullname: request.body.fullname,
+				email: request.body.email,
+				password: request.body.password
+		  	});
+		  	await register.save()
+		  	res.status(200).json({
+				success: true,
+				message: 'Your account has been created successfully'
+			});
 		}
-		// else {
-		//   const register = new user({
-		// 	name: request.body.name,
-		// 	email: request.body.email,
-		// 	gender: request.body.gender,
-		// 	phone: request.body.phone,
-		// 	password: request.body.password,
-		// 	createdAt: request.body.createdAt,
-		// 	isActive: request.body.isActive
-		//   });
-		//   await register.save()
-		//   reply.send({
-		// 	success: true,
-		// 	message: 'user_is_created',
-		// 	data: {
-		// 	  register
-		// 	}
-		//   })
-		// }
-	  } catch (error) {
-		reply.send(error)
-	  }
-
-	// try {
-		// res.status(201).json({
-		// 	success: true,
-		// 	message: 'Your account has been created successfully',
-		// 	fullname,
-		// });
-		// const { error, value } = signupSchema.validate({ fullname, email, password });
-
-		// if (error) {
-		// 	return res
-		// 		.status(401)
-		// 		.json({ success: false, message: error.details[0].message });
-		// }
-		// const existingUser = await User.findOne({ email });
-
-		// if (existingUser) {
-		// 	return res
-		// 		.status(401)
-		// 		.json({ success: false, message: 'User already exists!' });
-		// }
-
-		// const hashedPassword = await doHash(password, 12);
-
-		// const newUser = new User({
-		// 	fullname,
-		// 	email,
-		// 	password: hashedPassword,
-		// });
-		// const result = await newUser.save();
-		// result.password = undefined;
-		// res.status(201).json({
-		// 	success: true,
-		// 	message: 'Your account has been created successfully',
-		// 	result,
-		// });
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	} catch (error) {
+		console.log(error)
+	}
 };
 
 exports.signin = async (req, res) => {
