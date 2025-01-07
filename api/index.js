@@ -31,7 +31,7 @@ mongoose
 		console.log(err);
 	});
 
-app.use('/api/auth', authRouter);
+// app.use('/api/auth', authRouter);
 // app.use('/api', userRouter);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello from the server' });
