@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 
 const authRouter = require('./routers/authRouter');
 const userRouter = require('./routers/userRouter');
-// const postsRouter = require('./routers/postsRouter');
 
 // Konfigurasi CORS
 const corsOptions = {
@@ -34,7 +33,6 @@ mongoose
 
 app.use('/api/auth', authRouter);
 app.use('/api', userRouter);
-// app.use('/api/posts', postsRouter);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello from the server' });
 });
@@ -42,4 +40,3 @@ app.get('/', (req, res) => {
 app.listen(process.env.PORT, () => {
 	console.log('listening...');
 });
-

@@ -1,5 +1,4 @@
 const { jwtDecode } = require('jwt-decode')
-// const { createPostSchema } = require('../middlewares/validator');
 const User = require('../models/usersModel');
 
 exports.getProfile = async (req, res) => {
