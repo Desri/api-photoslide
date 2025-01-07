@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "path/to/dir/**/*": {
+      "maxDuration": 5
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
