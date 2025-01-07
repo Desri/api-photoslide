@@ -44,10 +44,10 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'https://wedding-eight-pi.vercel.app');
-	res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-	res.setHeader('Access-Control-Allow-Credentials', 'true');
+	// res.setHeader('Access-Control-Allow-Origin', 'https://wedding-eight-pi.vercel.app');
+	// res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+	// res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	// res.setHeader('Access-Control-Allow-Credentials', 'true');
 	const { email, password } = req.body;
 	try {
 		const { error, value } = signinSchema.validate({ email, password });
