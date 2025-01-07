@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const authRouter = require('./routers/authRouter');
-// const userRouter = require('./routers/userRouter');
+const userRouter = require('./routers/userRouter');
 
 // Konfigurasi CORS
 const corsOptions = {
@@ -31,11 +31,14 @@ mongoose
 		console.log(err);
 	});
 
-// Middleware atau logika lainnya
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello World from Express.js' });
-});
 app.use('/api/auth', authRouter);
+app.use('/api', userRouter);
+app.get('/', (req, res) => {
+	res.json({ message: 'Hello from the server' });
+});
 
-// Ekspor handler
+app.listen(process.env.PORT, () => {
+	console.log('listening...');
+});
+
 module.exports = app;
