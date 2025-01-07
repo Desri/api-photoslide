@@ -16,9 +16,9 @@ exports.signup = async (req, res) => {
 			});
 		} else {
 			const register = new User({
-				fullname: request.body.fullname,
-				email: request.body.email,
-				password: request.body.password
+				fullname: req.body.fullname,
+				email: req.body.email,
+				password: req.body.password
 		  	});
 		  	await register.save()
 		  	res.status(200).json({
