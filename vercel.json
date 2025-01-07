@@ -1,6 +1,6 @@
 {
   "functions": {
-    "path/to/dir/**/*": {
+    "api/**/*": {
       "maxDuration": 5
     }
   },
