@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-	.connect(process.env.MONGO_URI)
+	.connect('mongodb+srv://momentsbride2:2ztk02Veg1aOaB02@cluster0.qsull.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 	.then(() => {
 		console.log('Database connected');
 	})
