@@ -7,13 +7,48 @@ const User = require('../models/usersModel');
 const { doHash, doHashValidation } = require('../utils/hashing');
 
 exports.signup = async (req, res) => {
-	const { fullname, email, password } = req.body;
+	
+
 	try {
-		res.status(201).json({
-			success: true,
-			message: 'Your account has been created successfully',
-			fullname,
-		});
+		const { fullname, email, password } = req.body;
+
+
+		const existingUser = await User.findOne({ email });
+		if(existingUser) {
+			res.status(201).json({
+				success: false,
+				message: 'User already exists!'
+			});
+		}
+		// else {
+		//   const register = new user({
+		// 	name: request.body.name,
+		// 	email: request.body.email,
+		// 	gender: request.body.gender,
+		// 	phone: request.body.phone,
+		// 	password: request.body.password,
+		// 	createdAt: request.body.createdAt,
+		// 	isActive: request.body.isActive
+		//   });
+		//   await register.save()
+		//   reply.send({
+		// 	success: true,
+		// 	message: 'user_is_created',
+		// 	data: {
+		// 	  register
+		// 	}
+		//   })
+		// }
+	  } catch (error) {
+		reply.send(error)
+	  }
+
+	// try {
+		// res.status(201).json({
+		// 	success: true,
+		// 	message: 'Your account has been created successfully',
+		// 	fullname,
+		// });
 		// const { error, value } = signupSchema.validate({ fullname, email, password });
 
 		// if (error) {
@@ -43,9 +78,9 @@ exports.signup = async (req, res) => {
 		// 	message: 'Your account has been created successfully',
 		// 	result,
 		// });
-	} catch (error) {
-		console.log(error);
-	}
+	// } catch (error) {
+	// 	console.log(error);
+	// }
 };
 
 exports.signin = async (req, res) => {
