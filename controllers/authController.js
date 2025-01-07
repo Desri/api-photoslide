@@ -9,6 +9,11 @@ const { doHash, doHashValidation } = require('../utils/hashing');
 exports.signup = async (req, res) => {
 	const { fullname, email, password } = req.body;
 	try {
+		res.status(201).json({
+			success: true,
+			message: 'Your account has been created successfully',
+			fullname,
+		});
 		// const { error, value } = signupSchema.validate({ fullname, email, password });
 
 		// if (error) {
@@ -16,28 +21,28 @@ exports.signup = async (req, res) => {
 		// 		.status(401)
 		// 		.json({ success: false, message: error.details[0].message });
 		// }
-		const existingUser = await User.findOne({ email });
+		// const existingUser = await User.findOne({ email });
 
-		if (existingUser) {
-			return res
-				.status(401)
-				.json({ success: false, message: 'User already exists!' });
-		}
+		// if (existingUser) {
+		// 	return res
+		// 		.status(401)
+		// 		.json({ success: false, message: 'User already exists!' });
+		// }
 
-		const hashedPassword = await doHash(password, 12);
+		// const hashedPassword = await doHash(password, 12);
 
-		const newUser = new User({
-			fullname,
-			email,
-			password: hashedPassword,
-		});
-		const result = await newUser.save();
-		result.password = undefined;
-		res.status(201).json({
-			success: true,
-			message: 'Your account has been created successfully',
-			result,
-		});
+		// const newUser = new User({
+		// 	fullname,
+		// 	email,
+		// 	password: hashedPassword,
+		// });
+		// const result = await newUser.save();
+		// result.password = undefined;
+		// res.status(201).json({
+		// 	success: true,
+		// 	message: 'Your account has been created successfully',
+		// 	result,
+		// });
 	} catch (error) {
 		console.log(error);
 	}
