@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const serverless = require('serverless-http');
 
 const authRouter = require('./routers/authRouter');
 const userRouter = require('./routers/userRouter');
@@ -41,4 +42,4 @@ app.listen(process.env.PORT, () => {
 	console.log('listening...');
 });
 
-module.exports = app;
+module.exports = serverless(app);
