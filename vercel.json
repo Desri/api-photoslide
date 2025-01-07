@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/**/*": {
-      "maxDuration": 15
+      "maxDuration": 35
     }
   },
   "rewrites": [
