@@ -11,7 +11,8 @@ const userRouter = require('./../routers/userRouter');
 
 // Konfigurasi CORS
 const corsOptions = {
-	origin: process.env.BASE_URL, // Ganti dengan asal yang diperbolehkan
+	// origin: process.env.BASE_URL, // Ganti dengan asal yang diperbolehkan
+	origin: ['http://localhost:3000', 'https://wedding-eight-pi.vercel.app/'],
 	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Metode yang diizinkan
 	credentials: true, // Jika menggunakan cookie atau header otentikasi
 };
