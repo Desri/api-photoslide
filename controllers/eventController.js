@@ -37,3 +37,16 @@ exports.listEvent = async (req, res) => {
 		console.log(error);
 	}
 };
+
+exports.detailEvent = async (req, res) => {
+	try {
+		const DetailEvent = await Event.findOne({ _id: req.params.slug });
+		res.send({
+			success: true,
+			message: 'get detail event',
+			data: DetailEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
