@@ -5,7 +5,7 @@ exports.getProfile = async (req, res) => {
 	try {
 		const token = req.headers.authorization?.split(' ')[1]
 		const decoded = jwtDecode(token)
-		const result = await User.findOne({_id: `${decoded.userId}`}).select('email fullname');
+		const result = await User.findOne({_id: `${decoded.userId}`}).select('email fullname plan');
 		res.json({
 			success: true,
 			result,

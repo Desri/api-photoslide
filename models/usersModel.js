@@ -39,6 +39,10 @@ const userSchema = mongoose.Schema(
 			type: Number,
 			select: false,
 		},
+		plan: {
+			type: String,
+			default: ""
+		},
 	},
 	{
 		timestamps: true,
