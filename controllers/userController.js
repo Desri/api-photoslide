@@ -17,3 +17,26 @@ exports.getProfile = async (req, res) => {
 		});
 	}
 };
+
+exports.fetchAddPlan = async (req, res) => {
+	try {
+		const token = req.headers.authorization?.split(' ')[1]
+		const decoded = jwtDecode(token)
+		const updatePlan = await User.updateOne(
+			{_id: decoded.userId},
+			{$set: {
+			  "plan": req.body.plan
+			}}
+		);
+		if (updatePlan.acknowledged) {
+			res.json({
+				success: true,
+				message: 'successfully update plan',
+			});
+		}
+	} catch (error) {
+		res.json({
+			success: false
+		});
+	}
+};
