@@ -46,9 +46,11 @@ const eventSchema = mongoose.Schema(
 			},
 			hideSlideshowQR: {
 				type: Boolean,
+				default: false
 			},
 			hideVideoSound: {
 				type: Boolean,
+				default: false
 			}
 		},
 		moderation: {
