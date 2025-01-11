@@ -15,6 +15,10 @@ const eventSchema = mongoose.Schema(
 		eventType: {
 			type: String,
 		},
+		plan: {
+			type: mongoose.Types.ObjectId,
+			ref: 'User'
+		},
 	}
 );
 

@@ -26,8 +26,8 @@ exports.listEvent = async (req, res) => {
 		const token = req.headers.authorization?.split(' ')[1]
 		const decoded = jwtDecode(token)
 		const userId = decoded.userId;
-		const result = await Event.find({userId: `${userId}`});
-
+		const result = await Event.find({userId: `${userId}`})
+		.populate('plan', 'plan');
 		res.send({
 			success: true,
 			message: 'get list event',
