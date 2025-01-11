@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { jwtDecode } = require('jwt-decode')
 const Event = require('../models/eventModel');
 
@@ -12,7 +13,8 @@ exports.createEvent = async (req, res) => {
 			title: title,
 			eventType: eventType,
 			date: date,
-			userId: userId.userId
+			userId: userId.userId,
+			plan: userId.userId
 		});
 		await dataEvent.save()
 		res.status(201).json({ success: true, message: 'created', data: dataEvent });
@@ -26,13 +28,20 @@ exports.listEvent = async (req, res) => {
 		const token = req.headers.authorization?.split(' ')[1]
 		const decoded = jwtDecode(token)
 		const userId = decoded.userId;
+		const ObjectId = mongoose.Types.ObjectId;
 		const result = await Event
-		.find({userId: `${userId}`}).populate('userId', 'plan');
+		.find({userId: userId}).populate('plan');
 		res.send({
 			success: true,
 			message: 'get list event',
 			data: result
 		})
+		// const test = ObjectId
+		// res.send({
+		// 	success: true,
+		// 	message: 'get list event',
+		// 	data: new ObjectId(userId)
+		// })
 	} catch (error) {
 		console.log(error);
 	}
