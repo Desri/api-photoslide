@@ -51,3 +51,26 @@ exports.detailEvent = async (req, res) => {
 		console.log(error);
 	}
 };
+
+exports.slideshowEvent = async (req, res) => {
+	try {
+		const { durationImage, durationVideo, hideSlideshowQR, hideVideoSound } = req.body;
+
+		const updateSlideshowEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+			  "slideShow.durationImage": durationImage,
+			  "slideShow.durationVideo": durationVideo,
+			  "slideShow.hideSlideshowQR": hideSlideshowQR,
+			  "slideShow.hideVideoSound": hideVideoSound
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update slideshow event successfully',
+			data: updateSlideshowEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
