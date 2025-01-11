@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const eventSchema = mongoose.Schema(
+const eventSchema = new mongoose.Schema(
 	{
 		userId: {
-			type: String,
-			default: "",
+			type: mongoose.Types.ObjectId,
+			ref: 'User'
 		},
 		title: {
 			type: String,
@@ -15,10 +15,15 @@ const eventSchema = mongoose.Schema(
 		eventType: {
 			type: String,
 		},
-		plan: {
-			type: mongoose.Types.ObjectId,
-			ref: 'User'
-		},
+		// plan: {
+		// 	type: mongoose.Types.ObjectId,
+		// 	ref: 'User'
+		// },
+		// author: { 
+		// 	type: mongoose.Types.ObjectId,
+		// 	default: "6781d8907e5df2ef25400fed",
+		// 	ref: 'User' 
+		// }
 	}
 );
 
