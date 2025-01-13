@@ -77,13 +77,15 @@ exports.slideshowEvent = async (req, res) => {
 
 exports.moderationEvent = async (req, res) => {
 	try {
-		const { isManualApprove, isDisableGuestsDownload } = req.body;
+		const { isManualApprove, isDisableGuestsDownload, isAllowedMedia, digitalAlbumPermissions } = req.body;
 
 		const updateModerationEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
 			  "moderation.isManualApprove": isManualApprove,
-			  "moderation.isDisableGuestsDownload": isDisableGuestsDownload
+			  "moderation.isDisableGuestsDownload": isDisableGuestsDownload,
+			  "moderation.isAllowedMedia": isAllowedMedia,
+			  "moderation.digitalAlbumPermissions": digitalAlbumPermissions
 			}}
 		);
 		res.send({

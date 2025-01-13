@@ -61,6 +61,14 @@ const eventSchema = mongoose.Schema(
 			isDisableGuestsDownload: {
 				type: Boolean,
 				default: false
+			},
+			isAllowedMedia: {
+				type: String,
+				default: ""
+			},
+			digitalAlbumPermissions: {
+				type: String,
+				default: ""
 			}
 		},
 		collaborator: [{
