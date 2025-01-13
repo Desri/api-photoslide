@@ -74,3 +74,24 @@ exports.slideshowEvent = async (req, res) => {
 		console.log(error);
 	}
 };
+
+exports.moderationEvent = async (req, res) => {
+	try {
+		const { isManualApprove, isDisableGuestsDownload } = req.body;
+
+		const updateModerationEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+			  "moderation.isManualApprove": isManualApprove,
+			  "moderation.isDisableGuestsDownload": isDisableGuestsDownload
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update slideshow event successfully',
+			data: updateModerationEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};

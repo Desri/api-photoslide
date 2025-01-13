@@ -54,12 +54,13 @@ const eventSchema = mongoose.Schema(
 			}
 		},
 		moderation: {
-			permissions: {
-				type: String,
-				default: ""
-			},
-			disableGuestsDownload: {
+			isManualApprove: {
 				type: Boolean,
+				default: false
+			},
+			isDisableGuestsDownload: {
+				type: Boolean,
+				default: false
 			}
 		},
 		collaborator: [{
