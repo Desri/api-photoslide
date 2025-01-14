@@ -78,7 +78,6 @@ exports.slideshowEvent = async (req, res) => {
 exports.moderationEvent = async (req, res) => {
 	try {
 		const { isManualApprove, isDisableGuestsDownload, isAllowedMedia, digitalAlbumPermissions } = req.body;
-
 		const updateModerationEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
@@ -92,6 +91,27 @@ exports.moderationEvent = async (req, res) => {
 			success: true,
 			message: 'update slideshow event successfully',
 			data: updateModerationEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+exports.appearanceEvent = async (req, res) => {
+	try {
+		const { language, caption } = req.body;
+
+		const updateAppearanceEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+			  "appearance.language": language,
+			  "appearance.caption": caption
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update appearance event successfully',
+			data: updateAppearanceEvent
 		})
 	} catch (error) {
 		console.log(error);
