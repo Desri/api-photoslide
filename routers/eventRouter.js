@@ -9,5 +9,6 @@ router.get('/:slug', identifier, eventController.detailEvent)
 router.put('/slideshow-event', identifier, eventController.slideshowEvent)
 router.put('/moderation', identifier, eventController.moderationEvent)
 router.put('/appearance', identifier, eventController.appearanceEvent)
+router.put('/welcome-screen', identifier, eventController.welcomeScreen)
 
 module.exports = router;
