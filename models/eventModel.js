@@ -53,6 +53,12 @@ const eventSchema = mongoose.Schema(
 				default: false
 			}
 		},
+		welcomeScreen: {
+			title: {
+				type: String,
+				default: ""
+			}
+		},
 		moderation: {
 			isManualApprove: {
 				type: Boolean,

@@ -117,3 +117,23 @@ exports.appearanceEvent = async (req, res) => {
 		console.log(error);
 	}
 };
+
+exports.welcomeScreen = async (req, res) => {
+	try {
+		const { title } = req.body;
+
+		const updateWelcomeScreen = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+			  "welcomeScreen.title": title
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update welcome screen successfully',
+			data: updateWelcomeScreen
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
