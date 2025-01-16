@@ -3,7 +3,7 @@ const Event = require('../models/eventModel');
 
 exports.createEvent = async (req, res) => {
 	try {
-		const { title, eventType, date } = req.body;
+		const { title, eventType, value } = req.body;
 		const token = req.headers.authorization?.split(' ')[1]
 		const decoded = jwtDecode(token)
 		const userId = decoded;
@@ -11,7 +11,7 @@ exports.createEvent = async (req, res) => {
 		const dataEvent = new Event({
 			title: title,
 			eventType: eventType,
-			date: date,
+			date: value,
 			userId: userId.userId,
 			plan: userId.userId
 		});
