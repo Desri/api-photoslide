@@ -120,12 +120,13 @@ exports.appearanceEvent = async (req, res) => {
 
 exports.welcomeScreen = async (req, res) => {
 	try {
-		const { title } = req.body;
+		const { title, eventDate } = req.body;
 
 		const updateWelcomeScreen = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
-			  "welcomeScreen.title": title
+			  "welcomeScreen.title": title,
+			  "welcomeScreen.eventDate": eventDate
 			}}
 		);
 		res.send({

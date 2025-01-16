@@ -57,6 +57,10 @@ const eventSchema = mongoose.Schema(
 			title: {
 				type: String,
 				default: ""
+			},
+			eventDate: {
+				type: Object,
+				default: ""
 			}
 		},
 		moderation: {
