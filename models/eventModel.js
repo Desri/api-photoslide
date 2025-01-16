@@ -33,6 +33,10 @@ const eventSchema = mongoose.Schema(
 			},
 			eventLogo: {
 				type: Boolean,
+			},
+			colorPlate: {
+				type: String,
+				default: ""
 			}
 		},
 		slideShow: {

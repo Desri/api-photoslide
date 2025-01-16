@@ -99,13 +99,14 @@ exports.moderationEvent = async (req, res) => {
 
 exports.appearanceEvent = async (req, res) => {
 	try {
-		const { language, caption } = req.body;
+		const { language, caption, colorPlate } = req.body;
 
 		const updateAppearanceEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
 			  "appearance.language": language,
-			  "appearance.caption": caption
+			  "appearance.caption": caption,
+			  "appearance.colorPlate": colorPlate
 			}}
 		);
 		res.send({
