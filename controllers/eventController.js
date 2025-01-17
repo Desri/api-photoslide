@@ -139,3 +139,25 @@ exports.welcomeScreen = async (req, res) => {
 		console.log(error);
 	}
 };
+
+exports.generalEvent = async (req, res) => {
+	try {
+		const { title, eventType, date } = req.body;
+
+		const updateGeneralEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+			  date: date,
+			  title: title,
+			  eventType: eventType
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update event successfully',
+			data: updateGeneralEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
