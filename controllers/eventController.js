@@ -36,9 +36,9 @@ exports.appearanceEvent = upload.single("file"), async (req, res) => {
 		const updateAppearanceEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
-				"appearance.filename": file.filename,
-				"appearance.path": file.path,
-				"appearance.contentType": file.mimetype,
+				"appearance.filename": file.name,
+				// "appearance.path": file.path,
+				"appearance.contentType": file.type,
 				"appearance.language": language,
 				"appearance.caption": caption,
 				"appearance.colorPlate": colorPlate
