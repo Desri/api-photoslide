@@ -1,13 +1,6 @@
 const { jwtDecode } = require('jwt-decode')
 const multer = require("multer");
-const fs = require("fs");
 const Event = require('../models/eventModel');
-
-// Buat folder 'uploads' jika belum ada
-const uploadDir = "uploads";
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
 
 // Konfigurasi Multer
 const storage = multer.diskStorage({
