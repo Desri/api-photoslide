@@ -24,7 +24,7 @@ const upload = multer({
 	},
 });
 
-exports.appearanceEvent = upload.single("image"), async (req, res) => {
+exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
 		// res.send({
