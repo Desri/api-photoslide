@@ -5,7 +5,7 @@ const Event = require('../models/eventModel');
 // Konfigurasi Multer
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "uploads/");
+		cb(null, "./uploads/");
 	},
 	filename: (req, file, cb) => {
 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -27,28 +27,28 @@ const upload = multer({
 exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
-		console.log("File uploaded:", file);
-		res.send({
-			success: true,
-			message: 'update appearance event successfully',
-			data: file
-		})
-		// const updateAppearanceEvent = await Event.updateOne(
-		// 	{_id: req.body.eventId},
-		// 	{$set: {
-		// 		"appearance.filename": file.filename,
-		// 		"appearance.path": file.path,
-		// 		"appearance.contentType": file.mimetype,
-		// 		"appearance.language": language,
-		// 		"appearance.caption": caption,
-		// 		"appearance.colorPlate": colorPlate
-		// 	}}
-		// );
+		// console.log("File uploaded:", file);
 		// res.send({
 		// 	success: true,
 		// 	message: 'update appearance event successfully',
-		// 	data: updateAppearanceEvent
+		// 	data: file
 		// })
+		const updateAppearanceEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+				"appearance.filename": file.filename,
+				"appearance.path": file.path,
+				"appearance.contentType": file.mimetype,
+				"appearance.language": language,
+				"appearance.caption": caption,
+				"appearance.colorPlate": colorPlate
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update appearance event successfully',
+			data: updateAppearanceEvent
+		})
 	} catch (error) {
 		console.log(error);
 	}
