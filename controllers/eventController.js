@@ -24,26 +24,6 @@ const upload = multer({
 	},
 });
 
-app.post("/upload", upload.single("image"), async (req, res) => {
-	try {
-	  const { file } = req;
-  
-	  // Simpan informasi file ke MongoDB
-	  const newImage = new Image({
-		filename: file.filename,
-		path: file.path,
-		contentType: file.mimetype,
-	  });
-  
-	  await newImage.save();
-  
-	  res.status(201).json({ message: "Image uploaded successfully!", image: newImage });
-	} catch (err) {
-	  console.error("Error uploading image:", err);
-	  res.status(500).json({ error: "Failed to upload image" });
-	}
-  });
-
 exports.appearanceEvent = upload.single("image"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
