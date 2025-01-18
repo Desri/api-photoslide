@@ -5,7 +5,7 @@ const Event = require('../models/eventModel');
 // Konfigurasi Multer
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, path.join(__dirname, "uploads"));
+		cb(null, "uploads/");
 	},
 	filename: (req, file, cb) => {
 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -27,11 +27,11 @@ const upload = multer({
 exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
-		console.log("File uploaded:", req.body.file);
+		console.log("File uploaded:", file);
 		res.send({
 			success: true,
 			message: 'update appearance event successfully',
-			data: req.body.file
+			data: file
 		})
 		// const updateAppearanceEvent = await Event.updateOne(
 		// 	{_id: req.body.eventId},
