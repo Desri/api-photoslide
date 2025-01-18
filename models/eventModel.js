@@ -27,7 +27,7 @@ const eventSchema = mongoose.Schema(
 			},
 			path: {
 				type: String,
-				required: true
+				// required: true
 			},
 			contentType: {
 				type: String,
