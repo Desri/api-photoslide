@@ -27,11 +27,11 @@ const upload = multer({
 exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
-		console.log("File uploaded:", req.file);
+		console.log("File uploaded:", req.body.file);
 		res.send({
 			success: true,
 			message: 'update appearance event successfully',
-			data: req.file
+			data: req.body.file
 		})
 		// const updateAppearanceEvent = await Event.updateOne(
 		// 	{_id: req.body.eventId},
