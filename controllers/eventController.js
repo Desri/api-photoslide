@@ -27,27 +27,28 @@ const upload = multer({
 exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
-		// res.send({
-		// 	success: true,
-		// 	message: 'update appearance event successfully',
-		// 	data: file
-		// })
-		const updateAppearanceEvent = await Event.updateOne(
-			{_id: req.body.eventId},
-			{$set: {
-				"appearance.filename": file.filename,
-				"appearance.path": file.path,
-				"appearance.contentType": file.mimetype,
-				"appearance.language": language,
-				"appearance.caption": caption,
-				"appearance.colorPlate": colorPlate
-			}}
-		);
+		console.log("File uploaded:", req.file);
 		res.send({
 			success: true,
 			message: 'update appearance event successfully',
-			data: updateAppearanceEvent
+			data: req.file
 		})
+		// const updateAppearanceEvent = await Event.updateOne(
+		// 	{_id: req.body.eventId},
+		// 	{$set: {
+		// 		"appearance.filename": file.filename,
+		// 		"appearance.path": file.path,
+		// 		"appearance.contentType": file.mimetype,
+		// 		"appearance.language": language,
+		// 		"appearance.caption": caption,
+		// 		"appearance.colorPlate": colorPlate
+		// 	}}
+		// );
+		// res.send({
+		// 	success: true,
+		// 	message: 'update appearance event successfully',
+		// 	data: updateAppearanceEvent
+		// })
 	} catch (error) {
 		console.log(error);
 	}
