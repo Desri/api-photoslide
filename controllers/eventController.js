@@ -1,54 +1,73 @@
 const { jwtDecode } = require('jwt-decode')
+const multer = require("multer");
 const Event = require('../models/eventModel');
 
 // Konfigurasi Multer
-// const storage = multer.diskStorage({
-// 	destination: (req, file, cb) => {
-// 		cb(null, "uploads/");
-// 	},
-// 	filename: (req, file, cb) => {
-// 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-// 		cb(null, `${uniqueSuffix}-${file.originalname}`);
-// 	},
-// });
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "uploads/");
+	},
+	filename: (req, file, cb) => {
+		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+		cb(null, `${uniqueSuffix}-${file.originalname}`);
+	},
+});
 
-// const upload = multer({
-// 	storage: storage,
-// 	fileFilter: (req, file, cb) => {
-// 		if (file.mimetype.startsWith("image/")) {
-// 			cb(null, true);
-// 	  	} else {
-// 			cb(new Error("Only image files are allowed!"));
-// 	  	}
-// 	},
-// });
+const upload = multer({
+	storage: storage,
+	fileFilter: (req, file, cb) => {
+		if (file.mimetype.startsWith("image/")) {
+			cb(null, true);
+	  	} else {
+			cb(new Error("Only image files are allowed!"));
+	  	}
+	},
+});
 
-exports.appearanceEvent = async (req, res) => {
+app.post("/upload", upload.single("image"), async (req, res) => {
+	try {
+	  const { file } = req;
+  
+	  // Simpan informasi file ke MongoDB
+	  const newImage = new Image({
+		filename: file.filename,
+		path: file.path,
+		contentType: file.mimetype,
+	  });
+  
+	  await newImage.save();
+  
+	  res.status(201).json({ message: "Image uploaded successfully!", image: newImage });
+	} catch (err) {
+	  console.error("Error uploading image:", err);
+	  res.status(500).json({ error: "Failed to upload image" });
+	}
+  });
+
+exports.appearanceEvent = upload.single("image"), async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
-
-		res.send({
-			success: true,
-			message: 'update appearance event successfully',
-			data: file
-		})
-
-		// const updateAppearanceEvent = await Event.updateOne(
-		// 	{_id: req.body.eventId},
-		// 	{$set: {
-		// 		"appearance.filename": file.filename,
-		// 		"appearance.path": file.path,
-		// 		"appearance.contentType": file.mimetype,
-		// 		"appearance.language": language,
-		// 		"appearance.caption": caption,
-		// 		"appearance.colorPlate": colorPlate
-		// 	}}
-		// );
 		// res.send({
 		// 	success: true,
 		// 	message: 'update appearance event successfully',
-		// 	data: updateAppearanceEvent
+		// 	data: file
 		// })
+		const updateAppearanceEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+				"appearance.filename": file.filename,
+				"appearance.path": file.path,
+				"appearance.contentType": file.mimetype,
+				"appearance.language": language,
+				"appearance.caption": caption,
+				"appearance.colorPlate": colorPlate
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update appearance event successfully',
+			data: updateAppearanceEvent
+		})
 	} catch (error) {
 		console.log(error);
 	}
