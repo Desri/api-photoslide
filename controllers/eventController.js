@@ -28,12 +28,15 @@ exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
 		const file = req.file;
 		const { language, caption, colorPlate } = req.body;
+		if (!file) {
+			throw new Error("File not uploaded!");
+		}
 		const updateAppearanceEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
-				"appearance.filename": file.name,
-				// "appearance.path": file.path,
-				"appearance.contentType": file.type,
+				"appearance.filename": file.filename,
+				"appearance.path": file.path,
+				"appearance.contentType": file.mimetype,
 				"appearance.language": language,
 				"appearance.caption": caption,
 				"appearance.colorPlate": colorPlate
@@ -46,6 +49,11 @@ exports.appearanceEvent = upload.single("file"), async (req, res) => {
 		})
 	} catch (error) {
 		console.log(error);
+		res.status(500).send({
+			success: false,
+			message: "An error occurred",
+			error: error.message,
+		});
 	}
 };
 
