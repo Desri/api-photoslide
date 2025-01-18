@@ -1,6 +1,53 @@
 const { jwtDecode } = require('jwt-decode')
 const Event = require('../models/eventModel');
 
+// Konfigurasi Multer
+// const storage = multer.diskStorage({
+// 	destination: (req, file, cb) => {
+// 		cb(null, "uploads/");
+// 	},
+// 	filename: (req, file, cb) => {
+// 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// 		cb(null, `${uniqueSuffix}-${file.originalname}`);
+// 	},
+// });
+
+// const upload = multer({
+// 	storage: storage,
+// 	fileFilter: (req, file, cb) => {
+// 		if (file.mimetype.startsWith("image/")) {
+// 			cb(null, true);
+// 	  	} else {
+// 			cb(new Error("Only image files are allowed!"));
+// 	  	}
+// 	},
+// });
+
+exports.appearanceEvent = async (req, res) => {
+	try {
+		const { file, language, caption, colorPlate } = req.body;
+
+		const updateAppearanceEvent = await Event.updateOne(
+			{_id: req.body.eventId},
+			{$set: {
+				"appearance.filename": file.filename,
+				"appearance.path": file.path,
+				"appearance.contentType": file.mimetype,
+				"appearance.language": language,
+				"appearance.caption": caption,
+				"appearance.colorPlate": colorPlate
+			}}
+		);
+		res.send({
+			success: true,
+			message: 'update appearance event successfully',
+			data: updateAppearanceEvent
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 exports.createEvent = async (req, res) => {
 	try {
 		const { title, eventType, value, plan, userId } = req.body;
@@ -91,29 +138,6 @@ exports.moderationEvent = async (req, res) => {
 			success: true,
 			message: 'update slideshow event successfully',
 			data: updateModerationEvent
-		})
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-exports.appearanceEvent = async (req, res) => {
-	try {
-		const { eventLogo, language, caption, colorPlate } = req.body;
-
-		const updateAppearanceEvent = await Event.updateOne(
-			{_id: req.body.eventId},
-			{$set: {
-				"appearance.eventLogo": eventLogo,
-				"appearance.language": language,
-				"appearance.caption": caption,
-				"appearance.colorPlate": colorPlate
-			}}
-		);
-		res.send({
-			success: true,
-			message: 'update appearance event successfully',
-			data: updateAppearanceEvent
 		})
 	} catch (error) {
 		console.log(error);

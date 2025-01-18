@@ -21,8 +21,24 @@ const eventSchema = mongoose.Schema(
 			ref: 'User'
 		},
 		appearance: {
+			filename: {
+				type: String,
+				required: true
+			},
+			path: {
+				type: String,
+				required: true
+			},
+			contentType: {
+				type: String,
+				required: true
+			},
+			uploadedAt: {
+				type: Date,
+				default: Date.now
+			},
 			eventLogo: {
-				type: Binary,
+				type: String,
 				default: ""
 			},
 			language: {
