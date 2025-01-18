@@ -21,6 +21,10 @@ const eventSchema = mongoose.Schema(
 			ref: 'User'
 		},
 		appearance: {
+			eventLogo: {
+				type: Binary,
+				default: ""
+			},
 			language: {
 				type: String,
 				default: ""
@@ -30,9 +34,6 @@ const eventSchema = mongoose.Schema(
 				default: ""
 			},
 			textPostBackground: {
-				type: Boolean,
-			},
-			eventLogo: {
 				type: Boolean,
 			},
 			colorPlate: {
