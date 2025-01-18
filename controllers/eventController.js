@@ -27,22 +27,28 @@ exports.appearanceEvent = async (req, res) => {
 	try {
 		const { file, language, caption, colorPlate } = req.body;
 
-		const updateAppearanceEvent = await Event.updateOne(
-			{_id: req.body.eventId},
-			{$set: {
-				"appearance.filename": file.filename,
-				"appearance.path": file.path,
-				"appearance.contentType": file.mimetype,
-				"appearance.language": language,
-				"appearance.caption": caption,
-				"appearance.colorPlate": colorPlate
-			}}
-		);
 		res.send({
 			success: true,
 			message: 'update appearance event successfully',
-			data: updateAppearanceEvent
+			data: file
 		})
+
+		// const updateAppearanceEvent = await Event.updateOne(
+		// 	{_id: req.body.eventId},
+		// 	{$set: {
+		// 		"appearance.filename": file.filename,
+		// 		"appearance.path": file.path,
+		// 		"appearance.contentType": file.mimetype,
+		// 		"appearance.language": language,
+		// 		"appearance.caption": caption,
+		// 		"appearance.colorPlate": colorPlate
+		// 	}}
+		// );
+		// res.send({
+		// 	success: true,
+		// 	message: 'update appearance event successfully',
+		// 	data: updateAppearanceEvent
+		// })
 	} catch (error) {
 		console.log(error);
 	}
