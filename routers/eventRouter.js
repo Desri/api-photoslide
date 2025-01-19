@@ -10,7 +10,6 @@ router.put('/slideshow-event', identifier, eventController.slideshowEvent)
 router.put('/moderation', identifier, eventController.moderationEvent)
 router.put('/appearance', identifier, eventController.appearanceEvent)
 router.post('/upload-image', identifier, eventController.uploadImage)
-router.put('/appearance', identifier, eventController.appearanceEvent)
 router.put('/welcome-screen', identifier, eventController.welcomeScreen)
 router.put('/general', identifier, eventController.generalEvent)
 
