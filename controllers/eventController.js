@@ -1,28 +1,31 @@
 const { jwtDecode } = require('jwt-decode')
-const multer = require("multer");
+// const multer = require("multer");
+// const { v2: cloudinary } = require('cloudinary');
+// const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const Event = require('../models/eventModel');
 
 // Konfigurasi Multer
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, "uploads/");
-	},
-	filename: (req, file, cb) => {
-		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-		cb(null, `${uniqueSuffix}-${file.originalname}`);
-	},
-});
+// const storage = multer.diskStorage({
+// 	destination: (req, file, cb) => {
+// 		cb(null, "uploads/");
+// 	},
+// 	filename: (req, file, cb) => {
+// 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// 		cb(null, `${uniqueSuffix}-${file.originalname}`);
+// 	},
+// });
 
-const upload = multer({
-	storage: storage,
-	fileFilter: (req, file, cb) => {
-		if (file.mimetype.startsWith("image/")) {
-			cb(null, true);
-	  	} else {
-			cb(new Error("Only image files are allowed!"));
-	  	}
-	},
-});
+// const upload = multer({
+// 	storage: storage,
+// 	fileFilter: (req, file, cb) => {
+// 		if (file.mimetype.startsWith("image/")) {
+// 			cb(null, true);
+// 	  	} else {
+// 			cb(new Error("Only image files are allowed!"));
+// 	  	}
+// 	},
+// });
+
 
 exports.appearanceEvent = upload.single("file"), async (req, res) => {
 	try {
