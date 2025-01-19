@@ -72,6 +72,22 @@ const eventSchema = mongoose.Schema(
 			}
 		},
 		welcomeScreen: {
+			fileUrl: {
+				type: String,
+				default: ""
+			},
+			originalFilename: {
+				type: String,
+				default: ""
+			},
+			assetId: {
+				type: String,
+				default: ""
+			},
+			publicId: {
+				type: String,
+				default: ""
+			},
 			title: {
 				type: String,
 				default: ""

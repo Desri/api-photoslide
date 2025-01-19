@@ -164,13 +164,16 @@ exports.moderationEvent = async (req, res) => {
 
 exports.welcomeScreen = async (req, res) => {
 	try {
-		const { title, eventDate } = req.body;
-
+		const { fileUrl, originalFilename, assetId, publicId, title, eventDate } = req.body;
 		const updateWelcomeScreen = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
-			  "welcomeScreen.title": title,
-			  "welcomeScreen.eventDate": eventDate
+				"welcomeScreen.fileUrl": fileUrl,
+				"welcomeScreen.originalFilename": originalFilename,
+				"welcomeScreen.assetId": assetId,
+				"welcomeScreen.publicId": publicId,
+			  	"welcomeScreen.title": title,
+			  	"welcomeScreen.eventDate": eventDate
 			}}
 		);
 		res.send({
