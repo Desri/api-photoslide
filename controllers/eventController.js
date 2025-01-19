@@ -1,6 +1,6 @@
 const { jwtDecode } = require('jwt-decode')
 const Event = require('../models/eventModel');
-const upload = require('../middlewares/upload');
+// const upload = require('../middlewares/upload');
 
 // exports.appearanceEvent = upload.single("file"), async (req, res) => {
 // 	try {
