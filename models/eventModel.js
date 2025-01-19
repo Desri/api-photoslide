@@ -21,23 +21,19 @@ const eventSchema = mongoose.Schema(
 			ref: 'User'
 		},
 		appearance: {
-			filename: {
+			fileUrl: {
 				type: String,
-				required: true
+				default: ""
 			},
-			path: {
+			originalFilename: {
 				type: String,
-				// required: true
+				default: ""
 			},
-			contentType: {
+			assetId: {
 				type: String,
-				required: true
+				default: ""
 			},
-			uploadedAt: {
-				type: Date,
-				default: Date.now
-			},
-			eventLogo: {
+			publicId: {
 				type: String,
 				default: ""
 			},
