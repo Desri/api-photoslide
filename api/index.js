@@ -2,10 +2,6 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const multer = require("multer");
-const { v2: cloudinary } = require('cloudinary');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -13,24 +9,6 @@ require('dotenv').config()
 const eventRouter = require('./../routers/eventRouter');
 const authRouter = require('./../routers/authRouter');
 const userRouter = require('./../routers/userRouter');
-
-// Konfigurasi Cloudinary
-cloudinary.config({
-	cloud_name: 'doebhykyu', // Ganti dengan Cloud Name Anda
-	api_key: '443541184964513',       // Ganti dengan API Key Anda
-	api_secret: 'Vf9hly20DHcSoPi7LqvGiD3Kpeg', // Ganti dengan API Secret Anda
-});
-
-// Konfigurasi Multer dengan Cloudinary Storage
-const storage = new CloudinaryStorage({
-	cloudinary: cloudinary,
-	params: {
-	  folder: 'uploads', // Nama folder di Cloudinary
-	  allowed_formats: ['jpg', 'png'], // Format yang diperbolehkan
-	},
-});
-
-const upload = multer({ storage });
 
 
 // Konfigurasi CORS
@@ -47,7 +25,6 @@ app.options('*', cors(corsOptions));
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
-app.use(upload);
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
