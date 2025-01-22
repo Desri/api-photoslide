@@ -48,7 +48,7 @@ exports.createAlbums = async (req, res) => {
 
 exports.removeAlbums = async (req, res) => {
 	try {
-		const deleteAlbum = await Album.deleteOne({ _id: req.body.slug });
+		const deleteAlbum = await Album.deleteOne({ _id: req.body._id });
 		res.send({
 			success: true,
 			message: 'remove list album successfully',
