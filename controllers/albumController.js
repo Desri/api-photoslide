@@ -45,3 +45,16 @@ exports.createAlbums = async (req, res) => {
 		});
 	}
 };
+
+exports.removeAlbums = async (req, res) => {
+	try {
+		const deleteAlbum = await Album.deleteOne({ _id: req.body.slug });
+		res.send({
+			success: true,
+			message: 'remove list album successfully',
+			data: deleteAlbum
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
