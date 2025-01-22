@@ -1,5 +1,6 @@
 const { jwtDecode } = require('jwt-decode')
 const Album = require('../models/albumModel');
+const mongoose = require('mongoose');
 
 exports.listAlbums = async (req, res) => {
 	try {
@@ -48,7 +49,7 @@ exports.createAlbums = async (req, res) => {
 
 exports.removeAlbums = async (req, res) => {
 	try {
-		const deleteAlbum = await Album.deleteOne({ _id: req.body._id });
+		const deleteAlbum = await Album.deleteOne({ _id: req.body._id});
 		res.send({
 			success: true,
 			message: 'remove list album successfully',
