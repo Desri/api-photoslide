@@ -12,7 +12,7 @@ exports.createAlbums = async (req, res) => {
 		const dataAlbum = new Album({
 			eventId: eventId,
 			fileUrl: fileUrl,
-			userId: userId,
+			userId: userId.userId,
 			originalFilename: originalFilename,
 			assetId: assetId,
 			publicId: publicId
