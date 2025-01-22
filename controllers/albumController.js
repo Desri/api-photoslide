@@ -3,7 +3,7 @@ const Album = require('../models/albumModel');
 
 exports.listAlbums = async (req, res) => {
 	try {
-		const dataAlbum = await Event.find({ _id: req.params.slug });
+		const dataAlbum = await Album.find({ eventId: req.params.slug });
 		res.send({
 			success: true,
 			message: 'get list album',
