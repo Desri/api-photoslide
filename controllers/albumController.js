@@ -17,7 +17,7 @@ exports.createAlbums = async (req, res) => {
 			assetId: assetId,
 			publicId: publicId
 		});
-		await dataEvent.save()
+		await dataAlbum.save()
 		res.send({
 			success: true,
 			message: 'album created successfully',
