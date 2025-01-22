@@ -1,6 +1,19 @@
 const { jwtDecode } = require('jwt-decode')
 const Album = require('../models/albumModel');
 
+exports.listAlbums = async (req, res) => {
+	try {
+		const dataAlbum = await Event.find({ _id: req.params.slug });
+		res.send({
+			success: true,
+			message: 'get list album',
+			data: dataAlbum
+		})
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 exports.createAlbums = async (req, res) => {
 	try {
 		const { fileUrl, originalFilename, assetId, publicId, eventId } = req.body;
