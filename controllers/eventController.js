@@ -119,15 +119,19 @@ exports.detailEvent = async (req, res) => {
 
 exports.slideshowEvent = async (req, res) => {
 	try {
-		const { durationImage, durationVideo, hideSlideshowQR, hideVideoSound } = req.body;
+		const { fileUrl, originalFilename, assetId, publicId, durationImage, durationVideo, hideSlideshowQR, hideVideoSound } = req.body;
 
 		const updateSlideshowEvent = await Event.updateOne(
 			{_id: req.body.eventId},
 			{$set: {
-			  "slideShow.durationImage": durationImage,
-			  "slideShow.durationVideo": durationVideo,
-			  "slideShow.hideSlideshowQR": hideSlideshowQR,
-			  "slideShow.hideVideoSound": hideVideoSound
+				"slideShow.fileUrl": fileUrl,
+				"slideShow.originalFilename": originalFilename,
+				"slideShow.assetId": assetId,
+				"slideShow.publicId": publicId,
+				"slideShow.durationImage": durationImage,
+				"slideShow.durationVideo": durationVideo,
+				"slideShow.hideSlideshowQR": hideSlideshowQR,
+				"slideShow.hideVideoSound": hideVideoSound
 			}}
 		);
 		res.send({

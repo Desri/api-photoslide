@@ -54,6 +54,22 @@ const eventSchema = mongoose.Schema(
 			}
 		},
 		slideShow: {
+			fileUrl: {
+				type: String,
+				default: ""
+			},
+			originalFilename: {
+				type: String,
+				default: ""
+			},
+			assetId: {
+				type: String,
+				default: ""
+			},
+			publicId: {
+				type: String,
+				default: ""
+			},
 			durationImage: {
 				type: String,
 				default: ""
