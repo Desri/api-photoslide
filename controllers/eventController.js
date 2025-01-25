@@ -44,8 +44,7 @@ exports.createEvent = async (req, res) => {
 			eventType: eventType,
 			date: value,
 			userId: userId.userId,
-			// planType: plan
-			plan: userId.userId
+			plan: plan
 		});
 		await dataEvent.save()
 		res.status(201).json({ success: true, message: 'created', data: dataEvent });
@@ -60,7 +59,7 @@ exports.listEvent = async (req, res) => {
 		const decoded = jwtDecode(token)
 		const userId = decoded.userId;
 		const result = await Event
-		.find({userId: userId}).populate('plan', 'plan');
+		.find({userId: userId});
 		res.send({
 			success: true,
 			message: 'get list event',
