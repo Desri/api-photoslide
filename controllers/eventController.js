@@ -1,39 +1,5 @@
 const { jwtDecode } = require('jwt-decode')
 const Event = require('../models/eventModel');
-// const upload = require('../middlewares/upload');
-
-// exports.appearanceEvent = upload.single("file"), async (req, res) => {
-// 	try {
-// 		const file = req.file;
-// 		const { language, caption, colorPlate } = req.body;
-// 		if (!file) {
-// 			throw new Error("File not uploaded!");
-// 		}
-// 		const updateAppearanceEvent = await Event.updateOne(
-// 			{_id: req.body.eventId},
-// 			{$set: {
-// 				"appearance.filename": file.filename,
-// 				"appearance.path": file.path,
-// 				"appearance.contentType": file.mimetype,
-// 				"appearance.language": language,
-// 				"appearance.caption": caption,
-// 				"appearance.colorPlate": colorPlate
-// 			}}
-// 		);
-// 		res.send({
-// 			success: true,
-// 			message: 'update appearance event successfully',
-// 			data: updateAppearanceEvent
-// 		})
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.status(500).send({
-// 			success: false,
-// 			message: "An error occurred",
-// 			error: error.message,
-// 		});
-// 	}
-// };
 
 exports.appearanceEvent = async (req, res) => {
 	try {
@@ -68,17 +34,18 @@ exports.appearanceEvent = async (req, res) => {
 
 exports.createEvent = async (req, res) => {
 	try {
-		const { title, eventType, value, plan, userId } = req.body;
-		// const token = req.headers.authorization?.split(' ')[1]
-		// const decoded = jwtDecode(token)
-		// const userId = decoded;
+		const { title, eventType, value, plan } = req.body;
+		const token = req.headers.authorization?.split(' ')[1]
+		const decoded = jwtDecode(token)
+		const userId = decoded;
 
 		const dataEvent = new Event({
 			title: title,
 			eventType: eventType,
 			date: value,
-			userId: userId,
-			plan: plan
+			userId: userId.userId,
+			// planType: plan
+			plan: userId.userId
 		});
 		await dataEvent.save()
 		res.status(201).json({ success: true, message: 'created', data: dataEvent });

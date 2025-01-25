@@ -16,10 +16,16 @@ const eventSchema = mongoose.Schema(
 		eventType: {
 			type: String,
 		},
+		// plan: {
+		// 	type: mongoose.Types.ObjectId,
+		// 	ref: 'User'
+		// },
 		plan: {
-			type: mongoose.Types.ObjectId,
-			ref: 'User'
+			type: String
 		},
+		// planType: {
+		// 	type: String
+		// },
 		appearance: {
 			fileUrl: {
 				type: String,
