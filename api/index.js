@@ -6,12 +6,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
 
-const albumRouter = require('./../routers/albumRouter');
-const eventRouter = require('./../routers/eventRouter');
-const authRouter = require('./../routers/authRouter');
-const userRouter = require('./../routers/userRouter');
-
-
 const corsOptions = {
 	origin: 'https://wedding-eight-pi.vercel.app',
 	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -26,6 +20,11 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const albumRouter = require('./../routers/albumRouter');
+const eventRouter = require('./../routers/eventRouter');
+const authRouter = require('./../routers/authRouter');
+const userRouter = require('./../routers/userRouter');
 
 mongoose
 	.connect(process.env.MONGO_URI)
