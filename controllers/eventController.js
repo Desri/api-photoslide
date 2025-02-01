@@ -38,13 +38,15 @@ exports.createEvent = async (req, res) => {
 		const token = req.headers.authorization?.split(' ')[1]
 		const decoded = jwtDecode(token)
 		const userId = decoded;
-
+		const slug = title.replace(/\s+/g, '-').toLowerCase()
+		
 		const dataEvent = new Event({
 			title: title,
 			eventType: eventType,
 			date: value,
 			userId: userId.userId,
-			plan: plan
+			plan: plan,
+			slug: slug
 		});
 		await dataEvent.save()
 		res.status(201).json({ success: true, message: 'created', data: dataEvent });

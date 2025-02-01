@@ -19,6 +19,9 @@ const eventSchema = mongoose.Schema(
 		plan: {
 			type: String
 		},
+		slug: {
+			type: String
+		},
 		appearance: {
 			fileUrl: {
 				type: String,
